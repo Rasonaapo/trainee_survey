@@ -41,6 +41,47 @@ class SurveyAdmin(admin.ModelAdmin):
     list_display = ['description', 'created_at']
     search_fields = ['description']
 
+@admin.action(description='Export selected survey responses to CSV (uppercase)')
+def export_to_csv_uppercase(modeladmin, request, queryset):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="survey_responses_upper.csv"'
+
+    writer = csv.writer(response)
+    # Write header
+    writer.writerow([
+        'Index Number', 'Title', 'First Name', 'Middle Name',
+        'Surname', 'Gender', 'Date of Birth', 'Ghana Card Number',
+        'SSNIT Number', 'Nationality', 'Program', 'Level',
+        'Year Admitted', 'Student Status', 'Email',
+        'Bank Name', 'Bank Branch', 'Account Type', 'Account Number', 'Full Name'
+    ])
+
+    for obj in queryset:
+        writer.writerow([
+            str(obj.index_number).upper(),
+            str(obj.title).upper(),
+            str(obj.first_name).upper(),
+            str(obj.middle_name or '').upper(),
+            str(obj.surname).upper(),
+            str(obj.gender).upper(),
+            obj.date_of_birth.strftime('%Y-%m-%d'),
+            str(obj.ghana_card).upper(),
+            str(obj.ssnit_number or '').upper(),
+            str(obj.nationality).upper(),
+            str(obj.program.name).upper(),
+            str(obj.level),
+            str(obj.year_admitted).upper(),
+            str(obj.status).upper(),
+            str(obj.email).upper(),
+            str(obj.bank.bank_name).upper(),
+            str(obj.bank_branch).upper(),
+            str(obj.account_type).upper(),
+            str(obj.account_number).upper(),
+            str(obj.full_name).upper(),
+        ])
+
+    return response
+
 # Register your models here.
 @admin.register(SurveyResponse)
 class SurveyResponseAdmin(admin.ModelAdmin):
@@ -60,26 +101,4 @@ class SurveyResponseAdmin(admin.ModelAdmin):
     )
     readonly_fields = ('submitted_at', 'ip_address')
     
-    actions = ['export_selected_to_csv']
-
-    def export_selected_to_csv(self, request, queryset):
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="survey_responses.csv"'
-
-        writer = csv.writer(response)
-
-        # Define fields to export
-        fields = [f.name for f in SurveyResponse._meta.fields if f.name not in ['survey', 'submitted_at', 'ip_address']]
-        
-        # Write headers
-        writer.writerow(fields)
-
-        # Write data rows
-        for obj in queryset:
-            row = [getattr(obj, field) for field in fields]
-            writer.writerow(row)
-
-        return response
-
-    export_selected_to_csv.short_description = "Export selected responses to CSV"
-
+    actions = [export_to_csv_uppercase]
