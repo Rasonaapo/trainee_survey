@@ -1,0 +1,48 @@
+{% extends 'formsapp/auth_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container text-center mt-5">
+  <div id="success-box" class="p-4 rounded shadow-lg bg-white border border-success">
+    <div class="mb-4">
+      <img src="{% static 'images/checkmark.gif' %}" alt="Success" style="height: 120px;" />
+    </div>
+    <h1 class="display-5 text-success fw-bold mb-3 animate-fade">Thank You for Submitting!</h1>
+    <p class="lead animate-fade-slow">
+      If you have any concerns or corrections, kindly visit the <strong>ICT Office</strong> before the deadline <strong>17th June, 2025</strong>.
+    </p>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+  // Optional: animate the div fade-in
+  document.addEventListener("DOMContentLoaded", function () {
+    const box = document.getElementById("success-box");
+    box.classList.add("fade-in");
+  });
+</script>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    animation: fadeIn 1.2s ease-out forwards;
+  }
+
+  .animate-fade {
+    opacity: 0;
+    animation: fadeIn 1.4s ease-out forwards;
+  }
+
+  .animate-fade-slow {
+    opacity: 0;
+    animation: fadeIn 2s ease-out forwards;
+  }
+</style>
+{% endblock %}

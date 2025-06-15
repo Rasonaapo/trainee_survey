@@ -1,0 +1,234 @@
+{% extends 'formsapp/auth_base.html' %}
+{% load static %}
+
+{% block styles %}
+<link href="{% static 'plugin/libs/select2/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'plugin/libs/flatpickr/flatpickr.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/select2.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'plugin/libs/multiselect/css/multi-select.css' %}" rel="stylesheet" type="text/css" />
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'plugin/libs/select2/js/select2.min.js' %}"></script>
+<script src="{% static 'plugin/libs/sweetalert2/sweetalert2.min2.js' %}"></script>
+<script src="{% static 'plugin/libs/flatpickr/flatpickr.min.js' %}"></script>
+<script src="{% static 'plugin/libs/multiselect/js/jquery.multi-select.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+
+{% load widget_tweaks %}
+<!-- {% load crispy_forms_tags %} -->
+
+     <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="card bg-pattern">
+              <div class="card-body p-4">
+                <div class="text-center w-75 m-auto">
+                  <div class="auth-brand">
+                    <div style="font-family: Arial, sans-serif; line-height: 1.8; max-width: 800px; margin: 0 auto; text-align: center;">
+
+  <h2 style="color: #5a6770;">Data Collection for Trainee Allowances</h2>
+
+  <h3 style="color: #222; font-weight: bold;">NOTICE TO ALL DIRECT ENTRY STUDENTS (LEVEL 100 – 400)</h3>
+
+  <p style="text-align: justify;">
+    The <strong>Ministry of Health</strong> is requesting information to process the payment of 
+    <strong>TRAINEE ALLOWANCES</strong>. Therefore, 
+    <strong>all direct students from Level 100 to Level 400</strong> are required to 
+    <strong>complete this form before Tuesday, 17th June 2025</strong>, 
+    to enable the college to submit accurate data to the Ministry for payment.
+  </p>
+
+  <p style="text-align: left;"><strong>PLEASE NOTE:</strong></p>
+
+  <ol style="text-align: left; padding-left: 30px;">
+    <li><strong>FORMS MUST BE COMPLETED USING CAPITAL LETTERS.</strong></li>
+    <li><strong>Ensure all information provided is correct.</strong></li>
+    <li>
+      If you submit incorrect data, 
+      <strong>visit the ICT Office</strong> before the deadline to make necessary corrections.
+    </li>
+  </ol>
+
+  <p style="color: darkred; font-weight: bold; text-align: center;">
+    Failure to complete the form accurately and on time may result in non-payment of your allowance.
+  </p>
+
+  <p><strong>## Post Basics are not part of this data collection.</strong></p>
+</div>
+
+
+                    <a
+                      href=""
+                      class="logo logo-dark text-center"
+                    >
+                      <span class="logo-lg">
+                        <img
+                          src="{% static 'logo/cohk.jpg' %}"
+                          alt=""
+                          height="80px"
+                          width="80px"
+                        />
+                      </span>
+                    </a>
+
+                    <a
+                      href=""
+                      class="logo logo-light text-center"
+                    >
+                      <span class="logo-lg">
+                        <img
+                          src="{% static 'logo/cohk.jpg' %}"
+                          alt=""
+                          height="80px"
+                          width="80px"
+                        />
+                      </span>
+                    </a>
+                  </div>
+
+                </div>
+
+
+
+                <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-6">
+                <form method="POST" action="">
+                 <span class="text-danger">*Indicate required fields</span>
+                    {% csrf_token %}
+                   <!-- SECTION 1: PERSONAL INFO -->
+<h5 class="mt-4 mb-2 text-uppercase text-primary">📌 Personal Information</h5>
+
+<div class="form-group mb-3">
+  <p><strong>1.</strong></p>
+  {{ form.index_number|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>2.</strong></p>
+  {{ form.title|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>3.</strong></p>
+  {{ form.first_name|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>4.</strong></p>
+  {{ form.middle_name|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>5.</strong></p>
+  {{ form.surname|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>6.</strong></p>
+  {{ form.gender|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>7.</strong></p>
+  {{ form.date_of_birth|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>8.</strong></p>
+  {{ form.ghana_card|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>9.</strong></p>
+  {{ form.ssnit_number|as_crispy_field }}
+</div>
+
+<!-- SECTION 2: ACADEMIC INFO -->
+<h5 class="mt-4 mb-2 text-uppercase text-success">🎓 Academic Information</h5>
+
+<div class="form-group mb-3">
+  <p><strong>10.</strong></p>
+  {{ form.nationality|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>11.</strong></p>
+  {{ form.program|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>12.</strong></p>
+  {{ form.level|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>13.</strong></p>
+  {{ form.year_admitted|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>14.</strong></p>
+  {{ form.status|as_crispy_field }}
+</div>
+
+<!-- SECTION 3: BANKING INFO -->
+<h5 class="mt-4 mb-2 text-uppercase text-info">🏦 Banking Information</h5>
+
+<div class="form-group mb-3">
+  <p><strong>15.</strong></p>
+  {{ form.email|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>16.</strong></p>
+  {{ form.bank|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>17.</strong></p>
+  {{ form.bank_branch|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>18.</strong></p>
+  {{ form.account_type|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>19.</strong></p>
+  {{ form.account_number|as_crispy_field }}
+</div>
+<div class="form-group mb-3">
+  <p><strong>20.</strong></p>
+  {{ form.full_name|as_crispy_field }}
+</div>
+
+<div class="form-group text-center mt-4">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+
+
+                    </form>
+                </div>
+                </div>
+
+     
+
+
+              </div>
+              <!-- end card-body -->
+            </div>
+            <!-- end card -->
+
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
+
+{% endblock %}
+
+
+{% block javascript %}
+<script>
+    $('document').ready(function(){
+        console.log('err')
+        $('[data-toggle="select2"]').select2()
+
+        $('.select').select2();
+        $('.dateinput').flatpickr({ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d" });
+
+
+    });
+</script> 
+{% endblock %}

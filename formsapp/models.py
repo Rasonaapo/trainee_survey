@@ -3,8 +3,14 @@ from django.db import models
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.core.validators import RegexValidator
 
 # Create your models here.
+
+ghana_card_validator = RegexValidator(
+    regex=r'^GHA-\d{9}-\d$',
+    message='Ghana Card must follow the format: GHA-123456789-1'
+)
 
 
 class CustomUserManager(BaseUserManager):
@@ -106,7 +112,7 @@ class SurveyResponse(models.Model):
     surname = models.CharField(max_length=100)  
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
     date_of_birth = models.DateField(verbose_name="Date of Birth")
-    ghana_card = models.CharField(max_length=25, verbose_name="Ghana Card Number", help_text="e.g. GHA-12345789-1234")
+    ghana_card = models.CharField(max_length=25, verbose_name="Ghana Card Number", help_text="e.g. GHA-12345789-1", validators=[ghana_card_validator])
     ssnit_number = models.CharField(max_length=20, blank=True, null=True, verbose_name="SSNIT Number")
     nationality = models.CharField(max_length=20, choices=NATIONALITY_CHOICES)
     program = models.ForeignKey(Program, on_delete=models.PROTECT, verbose_name="Program of Study")
