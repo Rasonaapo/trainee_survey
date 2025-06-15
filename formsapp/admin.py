@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import *
 from django.contrib.auth.admin import UserAdmin
+import csv
+from django.http import HttpResponse
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
@@ -57,3 +59,27 @@ class SurveyResponseAdmin(admin.ModelAdmin):
         'program', 'level', 'status', 'gender', 'account_type', 'survey'
     )
     readonly_fields = ('submitted_at', 'ip_address')
+    
+    actions = ['export_selected_to_csv']
+
+    def export_selected_to_csv(self, request, queryset):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="survey_responses.csv"'
+
+        writer = csv.writer(response)
+
+        # Define fields to export
+        fields = [f.name for f in SurveyResponse._meta.fields if f.name not in ['survey', 'submitted_at', 'ip_address']]
+        
+        # Write headers
+        writer.writerow(fields)
+
+        # Write data rows
+        for obj in queryset:
+            row = [getattr(obj, field) for field in fields]
+            writer.writerow(row)
+
+        return response
+
+    export_selected_to_csv.short_description = "Export selected responses to CSV"
+
