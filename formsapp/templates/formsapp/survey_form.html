@@ -187,11 +187,15 @@
 <div class="form-group mb-3">
   <p><strong>19.</strong></p>
   {{ form.account_number|as_crispy_field }}
+    <span class="text-danger"><strong>GCB App Accounts Generated are Invalid. Do not use GCB App Generated Accounts</strong></span>
+
 </div>
 <div class="form-group mb-3">
   <p><strong>20.</strong></p>
   {{ form.full_name|as_crispy_field }}
 </div>
+
+<span class="text-danger"><strong>For inquiries, please contact or visit the ICT Office.</strong></span>
 
 <div class="form-group text-center mt-4">
   <button type="submit" class="btn btn-primary">Submit</button>
