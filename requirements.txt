@@ -3,6 +3,7 @@ crispy-bootstrap4==2025.6
 Django==5.2.3
 django-crispy-forms==2.4
 django-environ==0.12.0
+django-widget-tweaks==1.5.0
 environ==1.0
 pillow==11.2.1
 PyMySQL==1.1.1
