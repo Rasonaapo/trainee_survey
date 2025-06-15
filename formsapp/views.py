@@ -4,6 +4,7 @@ from django.views.generic import CreateView, UpdateView, DetailView
 from .models import SurveyResponse, Survey
 from .forms import SurveyResponseForm
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 class SurveyResponseCreateView(CreateView):
@@ -22,7 +23,9 @@ class SurveyResponseCreateView(CreateView):
         instance.survey = Survey.objects.first()  # Assuming you have a default survey instance
         instance.save()
 
-        return super().form_valid(form)
+        #return super().form_valid(form)
+        return HttpResponseRedirect(reverse_lazy('survey_success'))
+
 
     def form_invalid(self, form):
         print("Form is invalid")
