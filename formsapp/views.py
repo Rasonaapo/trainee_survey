@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import CreateView, UpdateView, DetailView
 from .models import SurveyResponse, Survey
@@ -12,6 +12,12 @@ class SurveyResponseCreateView(CreateView):
     template_name = 'formsapp/survey_form.html'
     form_class = SurveyResponseForm
     success_url = reverse_lazy('survey_success')  # new line
+
+    def dispatch(self, request, *args, **kwargs):
+        # check if there is an active survey
+        if not Survey.objects.filter(is_active=True).exists():
+            return redirect('survey_closed')
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         # Optionally add the IP address capture here

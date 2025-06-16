@@ -38,7 +38,7 @@ class ProgramAdmin(admin.ModelAdmin):
 
 @admin.register(Survey)
 class SurveyAdmin(admin.ModelAdmin):
-    list_display = ['description', 'created_at']
+    list_display = ['description', 'created_at', 'is_active']
     search_fields = ['description']
 
 @admin.action(description='Export selected survey responses to CSV (uppercase)')

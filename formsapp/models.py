@@ -91,6 +91,7 @@ class Survey(models.Model):
     description = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True, help_text="Indicates if the survey is currently active", verbose_name="Active Survey")
 
     def __str__(self):
         return f"{self.description}"
