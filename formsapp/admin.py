@@ -53,7 +53,7 @@ def export_to_csv_uppercase(modeladmin, request, queryset):
         'Surname', 'Gender', 'Date of Birth', 'Ghana Card Number',
         'SSNIT Number', 'Nationality', 'Program', 'Level',
         'Year Admitted', 'Student Status', 'Email',
-        'Bank Name', 'Bank Branch', 'Account Type', 'Account Number', 'Full Name'
+        'Bank Name', 'Bank Branch', 'Account Type', 'Account Number', 'Full Name', 'Submitted At'
     ])
 
     for obj in queryset:
@@ -78,6 +78,7 @@ def export_to_csv_uppercase(modeladmin, request, queryset):
             str(obj.account_type).upper(),
             str(obj.account_number).upper(),
             str(obj.full_name).upper(),
+            obj.submitted_at.strftime('%Y-%m-%d %I:%M:%S %p') if obj.submitted_at else ''
         ])
 
     return response
