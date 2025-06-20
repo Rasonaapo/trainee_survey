@@ -51,7 +51,7 @@ def export_to_csv_uppercase(modeladmin, request, queryset):
     writer.writerow([
         'Index Number', 'Title', 'First Name', 'Middle Name',
         'Surname', 'Gender', 'Date of Birth', 'Ghana Card Number',
-        'SSNIT Number', 'Nationality', 'Program', 'Level',
+        'Nationality', 'Program', 'Level',
         'Year Admitted', 'Student Status', 'Email',
         'Bank Name', 'Bank Branch', 'Account Type', 'Account Number',  'Submitted At'
     ])
@@ -66,7 +66,6 @@ def export_to_csv_uppercase(modeladmin, request, queryset):
             str(obj.gender).upper(),
             obj.date_of_birth.strftime('%Y-%m-%d'),
             str(obj.ghana_card).upper(),
-            str(obj.ssnit_number or '').upper(),
             str(obj.nationality).upper(),
             str(obj.program.name).upper(),
             str(obj.level),
@@ -88,7 +87,7 @@ class SurveyResponseAdmin(admin.ModelAdmin):
     # Show all fields except 'ip_address'
     list_display = (
         'index_number', 'title', 'first_name', 'middle_name', 'surname', 'gender',
-        'date_of_birth', 'ghana_card', 'ssnit_number', 'nationality', 'program',
+        'date_of_birth', 'ghana_card', 'nationality', 'program',
         'level', 'year_admitted', 'status', 'email', 'bank', 'bank_branch',
         'account_type', 'account_number', 'submitted_at'
     )

@@ -16,7 +16,6 @@ class SurveyResponseForm(forms.ModelForm):
             'date_of_birth': forms.DateInput(attrs={'class': 'datepicker', 'type': 'date'}),
             'ghana_card': forms.TextInput(attrs={'class': 'form-control','pattern': '^GHA-\\d{9}-\\d$',
             'title': 'Format: GHA-123456789-1'}),
-            'ssnit_number': forms.TextInput(attrs={'class': 'form-control'}),
             'nationality': forms.Select(attrs={'class': 'form-control'}),
             'program': forms.Select(attrs={'class': 'form-control'}),
             'level': forms.Select(attrs={'class': 'form-control'}),
