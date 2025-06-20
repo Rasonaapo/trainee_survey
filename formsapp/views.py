@@ -20,13 +20,13 @@ class SurveyResponseCreateView(CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        # Optionally add the IP address capture here
+        # IP address is captured here
         ip = self.request.META.get('HTTP_X_FORWARDED_FOR') or self.request.META.get('REMOTE_ADDR')
         instance = form.save(commit=False)
         instance.ip_address = ip
 
-        # Assign the default survey instance prefilled through migration.. This will change in the future as an Admin will make active a survey
-        instance.survey = Survey.objects.first()  # Assuming you have a default survey instance
+        # Assign the default survey instance prefilled through migration.. This will change in the future as an Admin will make active a survey and vice versa
+        instance.survey = Survey.objects.first()  
         instance.save()
 
         #return super().form_valid(form)

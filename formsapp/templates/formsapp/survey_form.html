@@ -39,7 +39,7 @@
     The <strong>Ministry of Health</strong> is requesting information to process the payment of 
     <strong>TRAINEE ALLOWANCES</strong>. Therefore, 
     <strong>all direct students from Level 100 to Level 400</strong> are required to 
-    <strong>complete this form before Tuesday, 17th June 2025</strong>, 
+    <strong>complete this form before Sunday, 20th June 2025</strong>, 
     to enable the college to submit accurate data to the Ministry for payment.
   </p>
 
@@ -189,11 +189,6 @@
   {{ form.account_number|as_crispy_field }}
     <span class="text-danger"><strong>GCB App Accounts Generated are Invalid. Do not use GCB App Generated Accounts</strong></span>
 
-</div>
-<div class="form-group mb-3">
-  <p><strong>20.</strong></p>
-  {{ form.full_name|as_crispy_field }}
-</div>
 
 <span class="text-info"><strong> For inquiries, please visit the ICT Office.</strong></span>
 
@@ -226,7 +221,6 @@
 {% block javascript %}
 <script>
     $('document').ready(function(){
-        console.log('err')
         $('[data-toggle="select2"]').select2()
 
         $('.select').select2();
