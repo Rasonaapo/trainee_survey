@@ -53,7 +53,7 @@ def export_to_csv_uppercase(modeladmin, request, queryset):
         'Surname', 'Gender', 'Date of Birth', 'Ghana Card Number',
         'SSNIT Number', 'Nationality', 'Program', 'Level',
         'Year Admitted', 'Student Status', 'Email',
-        'Bank Name', 'Bank Branch', 'Account Type', 'Account Number', 'Full Name', 'Submitted At'
+        'Bank Name', 'Bank Branch', 'Account Type', 'Account Number',  'Submitted At'
     ])
 
     for obj in queryset:
@@ -77,7 +77,6 @@ def export_to_csv_uppercase(modeladmin, request, queryset):
             str(obj.bank_branch).upper(),
             str(obj.account_type).upper(),
             str(obj.account_number).upper(),
-            str(obj.full_name).upper(),
             obj.submitted_at.strftime('%Y-%m-%d %I:%M:%S %p') if obj.submitted_at else ''
         ])
 
@@ -91,7 +90,7 @@ class SurveyResponseAdmin(admin.ModelAdmin):
         'index_number', 'title', 'first_name', 'middle_name', 'surname', 'gender',
         'date_of_birth', 'ghana_card', 'ssnit_number', 'nationality', 'program',
         'level', 'year_admitted', 'status', 'email', 'bank', 'bank_branch',
-        'account_type', 'account_number', 'full_name', 'submitted_at'
+        'account_type', 'account_number', 'submitted_at'
     )
     search_fields = (
         'index_number', 'first_name', 'surname', 'ghana_card',
